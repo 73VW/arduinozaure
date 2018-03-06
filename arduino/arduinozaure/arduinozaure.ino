@@ -1,4 +1,3 @@
-#define NUM_DIGITAL_PINS 12
 void setup()
 {
   Serial.begin(9600);
@@ -17,10 +16,9 @@ void annonce()
 {
   while(Serial.available() == 0)
   {
-    Serial.println("My name is Arduinozaure\rSend [ok] to start.");
-    Serial.print("Number of digital pins: ");
-    Serial.println(NUM_DIGITAL_PINS);
-    delay(500);
+    Serial.print("My name is Arduinozaure. Send [ok] to start. Number of analogic pins: ");
+    Serial.println(NUM_ANALOG_INPUTS);
+    delay(250);
     String cmd = Serial.readString();
     if(cmd == "ok")
       break;
@@ -29,7 +27,7 @@ void annonce()
 
 void attente()
 {
-  Serial.println("You can now ask a sensor value.\rSend me its pin number.");
+  Serial.println("You can now ask a sensor value. Send me its pin number.");
   while(true)
   {
     unsigned long start = millis();
@@ -42,17 +40,14 @@ void attente()
     String m = Serial.readString();
     pinNumber = m.toInt();
     String msg;
-    if(pinNumber > 1 && pinNumber < (NUM_DIGITAL_PINS + 2)){
+    if(pinNumber >= 0 && pinNumber < NUM_ANALOG_INPUTS){
       pinMode(pinNumber, INPUT);
-      long val = digitalRead(pinNumber);
-      msg = "Value for pin ";
-      msg += pinNumber;
-      msg += ": ";
-      msg += val;
+      long val = analogRead(pinNumber);
+      msg = val;
     }
     else
     {
-      msg = "Wrong pin number specified..\rTry again..";
+      msg = "Wrong pin number specified..\r\nTry again..";
     }
     Serial.println(msg);
   }
