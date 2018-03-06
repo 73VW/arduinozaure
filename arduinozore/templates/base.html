@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>{% block title %}Arduinozore{% end %}</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+    body {
+        text-align: center;
+        min-width: 500px;
+    }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ static_url("semantic/semantic.css") }}">
+    <script src="{{ static_url("semantic/semantic.js") }}"></script>
+    {% block head %}
+    {% end %}
+  </head>
+  <body>
+    {% block body %}
+    {% end %}
+  </body>
+</html>
