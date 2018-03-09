@@ -1,19 +1,10 @@
 """Index page handler package."""
-import socket
-
-import tornado.web
-from sensors import get_classes
 from settings import TEMPLATE_FOLDER
+from tornado.web import RequestHandler
 
 
-class IndexPageHandler(tornado.web.RequestHandler):
-    """Index page handler."""
-
-    def __init__(self, *args, **kwargs):
-        """Init handler."""
-        s_p = kwargs.pop('ssl_port')
-        self.ssl_port = s_p
-        super(IndexPageHandler, self).__init__(*args, **kwargs)
+class BaseHandler(RequestHandler):
+    """Device page handler."""
 
     def get_template_path(self):
         """Get template path in order to find template files."""
@@ -22,14 +13,8 @@ class IndexPageHandler(tornado.web.RequestHandler):
     def prepare(self):
         """Prepare requests."""
         if self.request.protocol == 'http':
-            self.redirect('https://' + self.request.host, permanent=False)
-
-    def get(self):
-        """Handle get request."""
-        the_host = socket.gethostname()
-        classes = get_classes()
-        self.render('card.html', host=the_host,
-                    port=self.ssl_port, items=classes)
+            self.redirect('https://' + self.request.host +
+                          self.request.uri, permanent=False)
 
     def set_default_headers(self, *args, **kwargs):
         """Set default headers."""
