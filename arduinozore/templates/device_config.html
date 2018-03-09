@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Arduinozore{% end %}
+{% block subtitle %}Configuration pour {{device}}{% end %}
+{% block head %}
+{% end %}
+{% block body %}
+<div class="ui inverted segment">
+    <form class="ui inverted form" method="POST" action="./edit">
+        <div class="field">
+            <label>Nom du device</label>
+            <input name="device-name" placeholder="Nom du device" type="text" value="{{device_name}}">
+        </div>
+        {% for i in range(nb_ports)%}
+        <div class="inline field">
+            <h3>Port {{i}}</h3>
+            <div class="ui toggle checkbox">
+                <input name="port{{i}}[enabled]" type="checkbox" {% raw '' if ports[i]['enabled'] is '' else 'checked="checked"'%}>
+                <label>Activer</label>
+            </div>
+            <label>Nom du port</label>
+            <input name="port{{i}}[name]" class="port{{i}}" placeholder="Nom" type="text" value="{{ports[i]['name']}}" {% raw 'disabled="disabled"' if ports[i]['enabled'] is '' else ''%}>
+            <label>Type de capteur</label>
+            <input name="port{{i}}[type]" placeholder="Type de capteur" class="port{{i}}" type="text" value="{{ports[i]['type']}}" {% raw 'disabled="disabled"' if ports[i]['enabled'] is '' else ''%}>
+        </div>
+        {% end %}
+        <button class="ui button" type="submit">Envoyer</button>
+    </form>
+</div>
+<script>
+$(function(){
+
+    $(":checkbox").on('change', function() {
+        let port = this.name.split("[")[0]
+        if(this.checked)
+        $("."+port).prop('disabled', '');
+        else
+        $("."+port).prop('disabled', 'disabled');
+    })
+});
+</script>
+{% end %}

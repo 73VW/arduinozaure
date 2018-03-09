@@ -104,3 +104,4 @@ ENV/
 */certs
 os
 arduinozore/static/semantic/
+arduinozore/.config/device/*

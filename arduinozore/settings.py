@@ -23,3 +23,9 @@ ssl_opts = {
 
 settings = {'debug': True,
             'static_path': STATIC_PATH}
+
+CONFIG_FOLDER = path(ROOT, '.config')
+DEVICE_CONFIG_FOLDER = path(CONFIG_FOLDER, 'device')
+CARDS = dict()
+CARDS['UNO'] = dict()
+CARDS['UNO']['NB_PINS'] = 6

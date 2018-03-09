@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Arduinozore{% end %}
+{% block head %}
+{% end %}
+{% block body %}
+{% if arduinos is not None and len(arduinos) is not 0 %}
+{%for arduino in arduinos%}
+
+<div class="ui card">
+    <div class="image dimmable">
+        <div class="ui blurring inverted dimmer transition hidden">
+            <div class="content">
+                <div class="center">
+                    <div class="ui teal button">Watch details</div>
+                </div>
+            </div>
+        </div>
+        <img src="https://www.arduino.cc/en/uploads/Trademark/ArduinoCommunityLogo.png">
+    </div>
+    <div class="content">
+        <a class="group" href="/device/{{ escape(arduino.device) }}">
+        <div class="header">{{ escape(" ".join(arduino.description.split()[:-1])) }}</div>
+        <div class="meta">{{ escape(arduino.device) }}
+        </div></a>
+        <div class="description">Afficher plus de détails pour ce device</div>
+    </div>
+</div>
+{%end%}
+{% else %}
+<h2>No device connected...</h2>
+{% end %}
+{% end %}
