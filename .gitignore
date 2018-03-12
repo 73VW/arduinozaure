@@ -104,4 +104,5 @@ ENV/
 */certs
 os
 arduinozore/static/semantic/
+arduinozore/static/jquery.js
 arduinozore/.config/device/*

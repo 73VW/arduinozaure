@@ -12,9 +12,11 @@ class BaseHandler(RequestHandler):
 
     def prepare(self):
         """Prepare requests."""
+        self.redirect_url = 'https://' + self.request.host
+        self.redirect_url += self.request.uri.rstrip("/")
+
         if self.request.protocol == 'http':
-            self.redirect('https://' + self.request.host +
-                          self.request.uri, permanent=False)
+            self.redirect(self.redirect_url, permanent=False)
 
     def set_default_headers(self, *args, **kwargs):
         """Set default headers."""

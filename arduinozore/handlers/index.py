@@ -2,6 +2,7 @@
 
 from .baseHandler import BaseHandler
 from .tools import get_arduinos
+from models.device import Device
 
 
 class IndexPageHandler(BaseHandler):
@@ -9,5 +10,5 @@ class IndexPageHandler(BaseHandler):
 
     def get(self):
         """Handle get request."""
-        arduinos = get_arduinos()
-        self.render('index.html', arduinos=arduinos)
+        devices = Device.get_connected_devices()
+        self.render('index.html', devices=devices)

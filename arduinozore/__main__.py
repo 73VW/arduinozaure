@@ -1,5 +1,8 @@
 """Arduinozore module."""
 
+import socket
+import sys
+
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -7,7 +10,9 @@ import tornado.websocket
 from handlers.error404handler import My404Handler
 from handlers.serialManager import SerialManager
 from handlers.ws import WSHandler
-from settings import SSL_PORT, settings, ssl_opts
+from settings import SSL_PORT
+from settings import settings
+from settings import ssl_opts
 from urls import url_pattern
 
 
@@ -28,9 +33,11 @@ def main():
         )
         http_server.listen(SSL_PORT)
         tornado.ioloop.PeriodicCallback(WSHandler.write_to_clients, 500).start()
+        print("Listening on : https://" + str(socket.gethostname()))
+        sys.stdout.flush()
         tornado.ioloop.IOLoop.instance().start()
     except Exception as e:
-        print(e)
+        exit(e)
     finally:
         serial_manager.join()
 

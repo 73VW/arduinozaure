@@ -1,0 +1,6 @@
+!Sensor
+max_value: 1
+min_value: 0
+name: Essai
+reverse: false
+suffix: bit

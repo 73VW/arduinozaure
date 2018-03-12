@@ -2,7 +2,9 @@
 import json
 import sys
 import time
-from multiprocessing import Event, Manager, Process
+from multiprocessing import Event
+from multiprocessing import Manager
+from multiprocessing import Process
 
 from .serialReader import SerialReader
 
@@ -13,7 +15,6 @@ class SerialManager(Process):
     def __init__(self):
         """Init process."""
         Process.__init__(self)
-        self.name = "Fucking manager"
         self.exit = Event()
         self.serial_readers = {}
         print("Manager inited")
@@ -45,7 +46,7 @@ class SerialManager(Process):
             try:
                 # print("Manager running")
                 sys.stdout.flush()
-                time.sleep(0.5)
+                time.sleep(1)
             except (KeyboardInterrupt, RuntimeError) as e:
                 self.shutdown()
             except Exception as e:
