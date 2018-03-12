@@ -26,6 +26,5 @@ settings = {'debug': True,
 
 CONFIG_FOLDER = path(ROOT, '.config')
 DEVICE_CONFIG_FOLDER = path(CONFIG_FOLDER, 'device')
-CARDS = dict()
-CARDS['UNO'] = dict()
-CARDS['UNO']['NB_PINS'] = 6
+SENSOR_CONFIG_FOLDER = path(CONFIG_FOLDER, 'sensor')
+CARD_CONFIG_FOLDER = path(CONFIG_FOLDER, 'card')

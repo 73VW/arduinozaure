@@ -3,7 +3,8 @@
 import os
 
 from serial.tools import list_ports
-from settings import DEVICE_CONFIG_FOLDER, path
+from settings import DEVICE_CONFIG_FOLDER
+from settings import path
 from yaml import safe_load
 
 
@@ -33,10 +34,16 @@ def load_config(config_file):
 def load_config_from_arduino(arduino):
     """Load port list corresponding to arduino if it exists."""
     filenames = os.listdir(DEVICE_CONFIG_FOLDER)
-    config_name = f'{arduino.vid}{arduino.pid}{arduino.serial_number}'
-    config_name += ".yaml"
+    config_name = get_config_name(arduino)
     config_file = path(DEVICE_CONFIG_FOLDER, config_name)
     if config_name in filenames:
         return load_config(config_file)
     else:
         return (None, None)
+
+
+def get_config_name(arduino):
+    """Return config filename for arduino."""
+    config_name = f'{arduino.vid}{arduino.pid}{arduino.serial_number}'
+    config_name += ".yaml"
+    return config_name

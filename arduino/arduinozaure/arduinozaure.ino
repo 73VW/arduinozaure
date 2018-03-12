@@ -1,6 +1,6 @@
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(38400);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB
   }

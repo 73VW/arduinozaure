@@ -1,19 +1,9 @@
-{% extends "base.html" %}
-{% block title %}Arduinozore{% end %}
-{% block subtitle %}
-<div class="item">{{device}}</div>
+{% extends "device.html" %}
+{% block submenu%}
+<a class="item" href="/device">Devices</a>
 <div class="item">
-    <a class="ui yellow button" href="./{{slug}}/edit"><i class="edit outline icon"></i>Modifier la configuration</a>
+    <a class="ui green button" href="/device/{{device.name}}"><i class="edit outline icon"></i>Afficher la configuration</a>
 </div>
-<form class="item ui red button" action="." method="post">
-    <input name="_method" type="hidden" value="delete" />
-    <button type="submit" name="login-button" class="ui red submit button">
-        <i class="eraser icon"></i>
-        Supprimer la configuration
-    </button>
-</form>
-{% end %}
-{% block head %}
 {% end %}
 {% block body %}
 <div class="ui three column relaxed grid">
@@ -29,12 +19,21 @@
                 </tr>
             </thead>
             <tbody>
-                {% for p in ports %}
-                {% if ports[p]['enabled'] is not '' %}
+                {% for p in device.ports['input'] %}
+                {% if p.enabled %}
                 <tr>
-                    <td class="left aligned">{{ports[p]['name']}}</td>
-                    <td id="{{p}}" class="value">Connexion à la carte</td>
-                    <td>{{ports[p]['type']}}</td>
+                    <td class="left aligned">{{p.name}}</td>
+                    <td id="{{p.number}}" class="value">Connexion à la carte</td>
+                    <td>{{p._type}}</td>
+                </tr>
+                {% end %}
+                {% end %}
+                {% for p in device.ports['output'] %}
+                {% if p.enabled  %}
+                <tr>
+                    <td class="left aligned">{{p.name}}</td>
+                    <td></td>
+                    <td>{{p._type}}</td>
                 </tr>
                 {% end %}
                 {% end %}

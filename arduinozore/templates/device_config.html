@@ -5,7 +5,7 @@
 {% end %}
 {% block body %}
 <div class="ui inverted segment">
-    <form class="ui inverted form" method="POST" action="./edit">
+    <form class="ui inverted form" method="post" action=".">
         <div class="field">
             <label>Nom du device</label>
             <input name="device-name" placeholder="Nom du device" type="text" value="{{device_name}}">
@@ -22,6 +22,9 @@
             <label>Type de capteur</label>
             <input name="port{{i}}[type]" placeholder="Type de capteur" class="port{{i}}" type="text" value="{{ports[i]['type']}}" {% raw 'disabled="disabled"' if ports[i]['enabled'] is '' else ''%}>
         </div>
+        {% end %}
+        {% if method is not 'post'%}
+        <input name="_method" type="hidden" value="{{method}}" />
         {% end %}
         <button class="ui button" type="submit">Envoyer</button>
     </form>
