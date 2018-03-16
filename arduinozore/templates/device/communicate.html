@@ -32,7 +32,11 @@
                 {% if p.enabled  %}
                 <tr>
                     <td class="left aligned">{{p.name}}</td>
-                    <td></td>
+                    <td>
+                        <button class="ui button basculate" id="basculate[{{p.number}}]">
+                            Changer
+                        </button>
+                    </td>
                     <td>{{p._type}}</td>
                 </tr>
                 {% end %}
@@ -85,6 +89,11 @@ $(function(){
 
     $("#capteur").on('change', function() {
         sender(this.value);
+    })
+
+    $(".basculate").on('click', function(){
+        let port = this.id.split("[")[1].split("]")[0];
+        sender(port)
     })
 });
 </script>

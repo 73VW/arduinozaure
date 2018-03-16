@@ -6,13 +6,9 @@ from multiprocessing import Event
 from multiprocessing import Manager
 from multiprocessing import Process
 
-from serial import Serial
-from settings import DEVICE_CONFIG_FOLDER
-from settings import path
-from yaml import safe_load
-
 from models.device import Device
 from models.sensor import Sensor
+from serial import Serial
 
 
 class SerialReader(Process):
@@ -73,28 +69,26 @@ class SerialReader(Process):
         self.ser = Serial(self.serial_port, timeout=None, baudrate=38400)
 
         self.pattern = re.compile(r'[\t\r\n]+')
-        msg1 = 'My name is Arduinozaure. Send [ok] to start. Number of analogic pins: 6'
-        msg2 = 'You can now ask a sensor value. Send me its pin number.'
+        msg2 = 'You can now ask for reading [r] or writing [w].'
 
         self.ser.read(self.ser.inWaiting())
         datas = re.sub(self.pattern, '', self.ser.readline().decode())
-        while datas != msg1:
-            time.sleep(0.4)
-            datas = re.sub(self.pattern, '', self.ser.readline().decode())
         while datas != msg2:
-            self.ser.read(self.ser.inWaiting())
             self.ser.write("ok".encode())
             time.sleep(0.4)
             datas = re.sub(self.pattern, '', self.ser.readline().decode())
+            print(datas)
+            sys.stdout.flush()
 
     def read_serial(self):
         """Read serial port."""
-
         try:
             while not self.exit.is_set():
+                self.ser.read(self.ser.inWaiting())
                 self.get_port_list()
                 for port in dict(self.ports):
-                    self.ser.write(str.encode(str(port)))
+                    print(self.ser.read(self.ser.inWaiting()).decode())
+                    self.ser.write('r'.encode() + str.encode(str(port)))
                     data = re.sub(self.pattern, '',
                                   self.ser.readline().decode())
                     if self.sensors[port] is not None:
@@ -103,5 +97,10 @@ class SerialReader(Process):
                     else:
                         self.value[port] = data
                 self.parent.set_datas(self.serial_port, dict(self.value))
+                port = self.parent.get_toggelable_pin(self.serial_port)
+                if port is not None:
+                    print(self.ser.read(self.ser.inWaiting()).decode())
+                    self.ser.write('w'.encode() + str.encode(str(port)))
+
         except (KeyboardInterrupt) as e:
             exit()

@@ -1,8 +1,8 @@
 """Index page handler package."""
 
-from .baseHandler import BaseHandler
-from .tools import get_arduinos
 from models.device import Device
+
+from .baseHandler import BaseHandler
 
 
 class IndexPageHandler(BaseHandler):

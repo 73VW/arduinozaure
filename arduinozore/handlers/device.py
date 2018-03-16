@@ -1,21 +1,17 @@
 """Index page handler package."""
 import os
-import re
 import socket
 
-from sensors import get_classes
+from models.card import Card
+from models.device import Device
+from models.sensor import Sensor
 from settings import DEVICE_CONFIG_FOLDER
 from settings import SSL_PORT
 from settings import path
-from yaml import dump
 
 from .crudHandler import CrudHandler
 from .tools import get_arduino
 from .tools import get_config_name
-from .tools import load_config_from_arduino
-from models.device import Device
-from models.card import Card
-from models.sensor import Sensor
 
 
 class DevicePageHandler(CrudHandler):

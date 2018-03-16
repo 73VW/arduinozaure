@@ -1,8 +1,6 @@
 """WebSocket handler package."""
 import sys
-from multiprocessing import Process
 
-import sensors
 from tornado.websocket import WebSocketHandler
 
 
@@ -35,10 +33,9 @@ class WSHandler(WebSocketHandler):
 
     def on_message(self, message):
         """Handle incomming messages."""
-        if message is not "Capteurs":
-            sens_name = self.sensor.name
-            class_ = getattr(sensors, message)
-            self.sensor = class_(sens_name)
+        print(message)
+        sys.stdout.flush()
+        WSHandler.serial_manager.toggle_pin(self.port, int(message))
 
     def on_close(self):
         """Handle connection closing."""
