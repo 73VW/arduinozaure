@@ -33,16 +33,16 @@
             <div class="inline field">
                 <h3>Port {{i}}</h3>
                 <div class="ui toggle checkbox">
-                    <input name="port{{i}}[enabled]" type="checkbox" {% raw 'checked="checked"' if device.ports['input'][i].enabled else ''%}>
+                    <input name="port{{i}}[enabled]" type="checkbox" {% raw '' if device is None or not device.ports['input'][i].enabled else 'checked="checked"'%}>
                     <label>Activer</label>
                 </div>
                 <label>Nom du port</label>
-                <input name="port{{i}}[name]" class="port{{i}}" placeholder="Nom" type="text" value="{{device.ports['input'][i].name}}" {% raw '' if device.ports['input'][i].enabled else 'disabled="disabled"' %}>
+                <input name="port{{i}}[name]" class="port{{i}}" placeholder="Nom" type="text" value="{{'' if device is None else device.ports['input'][i].name}}" {% raw 'disabled="disabled"' if device is None or not device.ports['input'][i].enabled else '' %}>
                 <label>Type de capteur</label>
-                <select id="sensor" name="port{{i}}[_type]" class="ui dropdown port{{i}}" {% raw '' if device.ports['input'][i].enabled else 'disabled="disabled"' %}>
+                <select id="sensor" name="port{{i}}[_type]" class="ui dropdown port{{i}}" {% raw 'disabled="disabled"' if device is None or not device.ports['input'][i].enabled else '' %}>
                     <option value="">Type de capteur</option>
                     {% for s in sensors %}
-                    <option {% if device.ports['input'][i]._type is not None and device.ports['input'][i]._type == s.name %}selected="selected"{% end %} value="{{s.name}}">{{s.name}}</option>
+                    <option {% if device is not None and device.ports['input'][i]._type is not None and device.ports['input'][i]._type == s.name %}selected="selected"{% end %} value="{{s.name}}">{{s.name}}</option>
                     {% end %}
                 </select>
             </div>
@@ -52,11 +52,11 @@
             <div class="inline field">
                 <h3>Port {{i}}</h3>
                 <div class="ui toggle checkbox">
-                    <input name="port{{i + card.nb_input_pins}}[enabled]" type="checkbox" {% raw 'checked="checked"' if device.ports['output'][i].enabled else ''%}>
+                    <input name="port{{i + card.nb_input_pins}}[enabled]" type="checkbox" {% raw '' if device is None or not device.ports['output'][i].enabled else 'checked="checked"'%}>
                     <label>Activer</label>
                 </div>
                 <label>Nom du port</label>
-                <input name="port{{i+ card.nb_input_pins}}[name]" class="port{{i + card.nb_input_pins}}" placeholder="Nom" type="text" value="{{device.ports['output'][i].name}}" {% raw '' if device.ports['output'][i].enabled else 'disabled="disabled"' %} >
+                <input name="port{{i+ card.nb_input_pins}}[name]" class="port{{i + card.nb_input_pins}}" placeholder="Nom" type="text" value="{{ '' if device is None else device.ports['output'][i].name}}" {% raw 'disabled="disabled"' if device is None or not device.ports['output'][i].enabled else '' %} >
             </div>
             {% end %}
             {% end %}

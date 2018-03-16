@@ -7,7 +7,6 @@
 {% if devices is not None and len(devices) is not 0 %}
 <div class="ui link cards">
     {%for d in devices%}
-
     <a class="card" href="/device/{{ escape(d) }}">
         <div class="image dimmable">
             <div class="ui blurring inverted dimmer transition hidden">
@@ -20,14 +19,16 @@
             <img src="https://www.arduino.cc/en/uploads/Trademark/ArduinoCommunityLogo.png">
         </div>
         <div class="content">
+            {% if devices[d] is not None%}
             <div class="header">
                 {{ escape(devices[d].card.name) }}
             </div>
             <div class="meta">
-                {{ escape(d) }}
-            </div>
-            <div class="meta">
                 {{ escape(devices[d].name) }}
+            </div>
+            {% end %}
+            <div class="meta">
+                {{ escape(d) }}
             </div>
             {% if devices[d] is not None%}
             <div class="description">Cliquer pour afficher plus de détails pour ce device</div>

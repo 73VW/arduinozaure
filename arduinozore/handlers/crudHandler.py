@@ -9,7 +9,6 @@ class CrudHandler(BaseHandler):
 
     def get(self, slug=None, method=None):
         """Handle get request."""
-
         if slug is None:
             self.list()
             return
@@ -33,7 +32,6 @@ class CrudHandler(BaseHandler):
 
         Broswers can't send put and delete request so we have to fake them.
         """
-
         try:
             _method = self.get_argument('_method')
         except Exception:

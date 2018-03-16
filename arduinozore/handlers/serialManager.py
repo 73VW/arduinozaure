@@ -20,6 +20,25 @@ class SerialManager(Process):
         print("Manager inited")
         sys.stdout.flush()
         self.datas = Manager().dict()
+        self.out = Manager().dict()
+
+    def toggle_pin(self, port, pin):
+        """Toggle pin on card connected to port."""
+        if port not in dict(self.out):
+            self.out[port] = pin
+
+        print(port)
+        print(self.out[port])
+        sys.stdout.flush()
+
+    def get_toggelable_pin(self, port):
+        """Return toggelable pins for port."""
+        try:
+            toggle = self.out[port]
+            del self.out[port]
+            return toggle
+        except KeyError:
+            return None
 
     def set_datas(self, port, datas):
         """Set data from child process."""

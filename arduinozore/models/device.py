@@ -1,10 +1,10 @@
 """Device model package."""
+
+from serial.tools import list_ports
 from settings import DEVICE_CONFIG_FOLDER
 
-from .model import Model
 from .card import Card
-from serial.tools import list_ports
-import sys
+from .model import Model
 
 
 class Port(Model):
@@ -99,8 +99,11 @@ class Device(Model):
     def get_config(cls, name):
         """Get config by name."""
         configs = cls.get_all()
-        return next(
-            (config for config in configs if config.name == name), None)
+        if configs is not None:
+            return next(
+                (config for config in configs if config.name == name), None)
+        else:
+            return configs
 
     @classmethod
     def get_identifier_from_serial(cls, serial):
