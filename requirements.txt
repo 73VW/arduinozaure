@@ -8,3 +8,5 @@ tornado
 pyserial
 netifaces
 pyyaml
+argparse
+pyfiglet

@@ -17,8 +17,6 @@ class SerialManager(Process):
         Process.__init__(self)
         self.exit = Event()
         self.serial_readers = {}
-        print("Manager inited")
-        sys.stdout.flush()
         self.datas = Manager().dict()
         self.out = Manager().dict()
 
@@ -73,8 +71,6 @@ class SerialManager(Process):
             finally:
                 for s_r in self.serial_readers:
                     self.serial_readers[s_r].join()
-        print("Manager exited")
-        sys.stdout.flush()
 
     def shutdown(self):
         """Shut down process."""

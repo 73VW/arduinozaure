@@ -7,7 +7,7 @@
 {% if devices is not None and len(devices) is not 0 %}
 <div class="ui link cards">
     {%for d in devices%}
-    <a class="card" href="/device/{{ escape(d) }}">
+    <a class="card" href="/device/{{ url_escape(d) }}">
         <div class="image dimmable">
             <div class="ui blurring inverted dimmer transition hidden">
                 <div class="content">

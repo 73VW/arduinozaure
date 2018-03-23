@@ -24,7 +24,11 @@ ssl_opts = {
 settings = {'debug': True,
             'static_path': STATIC_PATH}
 
-CONFIG_FOLDER = path(ROOT, '.config')
+CONFIG_FOLDER = path(os.path.expanduser("~"), '.arduinozore')
 DEVICE_CONFIG_FOLDER = path(CONFIG_FOLDER, 'device')
 SENSOR_CONFIG_FOLDER = path(CONFIG_FOLDER, 'sensor')
 CARD_CONFIG_FOLDER = path(CONFIG_FOLDER, 'card')
+
+ARDUINO_CODE_FILE_NAME = 'arduinozore.ino'
+ARDUINO_FILE_PATH = path(ROOT, '..', 'arduino',
+                         'arduinozore', ARDUINO_CODE_FILE_NAME)

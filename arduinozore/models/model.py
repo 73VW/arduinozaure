@@ -64,6 +64,8 @@ class Model(YAMLObject):
     def _get_all(cls, folder):
         """Get all models configurations."""
         models = list()
+        if not os.path.exists(folder):
+            os.makedirs(folder)
         config_files = os.listdir(folder)
         if config_files is not None and len(config_files) > 0:
             for config_file in config_files:
