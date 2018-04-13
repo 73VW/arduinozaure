@@ -1,6 +1,0 @@
-!Sensor
-max_value: 125
-min_value: -55
-name: KY-028
-reverse: true
-suffix: °C

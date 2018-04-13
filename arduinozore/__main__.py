@@ -19,6 +19,7 @@ from pyfiglet import Figlet
 from settings import ARDUINO_CODE_FILE_NAME
 from settings import ARDUINO_FILE_PATH
 from settings import CONFIG_FOLDER
+from settings import PORT
 from settings import SSL_PORT
 from settings import path
 from settings import settings
@@ -55,7 +56,7 @@ def main():
         if os.path.exists(CONFIG_FOLDER):
             rmtree(CONFIG_FOLDER)
 
-    http_port = 80 if args.http_port is None else args.http_port
+    http_port = PORT if args.http_port is None else args.http_port
     ssl_port = SSL_PORT if args.https_port is None else args.https_port
 
     check_config_folder()

@@ -14,7 +14,8 @@ TEMPLATE_FOLDER = path(ROOT, 'templates/')
 CERT_FOLDER = path(ROOT, 'certs/')
 STATIC_PATH = path(ROOT, 'static/')
 
-SSL_PORT = 443
+PORT = 8000
+SSL_PORT = 8001
 
 ssl_opts = {
     "certfile": path(CERT_FOLDER, "myserver.crt.pem"),
