@@ -9,8 +9,10 @@
     <form name="card" class="ui inverted form" method="get" action="./create">
         <select id="card" name="card" class="ui dropdown">
             <option value="">Type de carte</option>
+            {% if cards is not None%}
             {% for c in cards %}
             <option {% if card is not None and card.name == c.name %} selected="selected" {% end %} value="{{c.name}}">{{c.name}}</option>
+            {% end %}
             {% end %}
         </select>
     </form>
@@ -41,8 +43,10 @@
                 <label>Type de capteur</label>
                 <select id="sensor" name="port{{i}}[_type]" class="ui dropdown port{{i}}" {% raw 'disabled="disabled"' if device is None or not device.ports['input'][i].enabled else '' %}>
                     <option value="">Type de capteur</option>
+                    {% if sensors is not None%}
                     {% for s in sensors %}
                     <option {% if device is not None and device.ports['input'][i]._type is not None and device.ports['input'][i]._type == s.name %}selected="selected"{% end %} value="{{s.name}}">{{s.name}}</option>
+                    {% end %}
                     {% end %}
                 </select>
             </div>

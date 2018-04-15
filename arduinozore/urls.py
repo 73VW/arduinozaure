@@ -21,5 +21,5 @@ url_pattern = [
     (r'/card/?$', CardHandler),
     (r'/card/([^/]+)/?$', CardHandler),
     (r'/card/([^/]+)/(?:(edit)\w?)?/?$', CardHandler),
-    (r'/ws/([^/]+)', WSHandler),  # always the last one!
+    (r'/ws/([^/]+)', WSHandler),
 ]

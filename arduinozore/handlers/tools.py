@@ -44,6 +44,8 @@ def load_config_from_arduino(arduino):
 
 def get_config_name(arduino):
     """Return config filename for arduino."""
-    config_name = f'{arduino.vid}{arduino.pid}{arduino.serial_number}'
+    config_name = str(arduino.vid)
+    config_name += str(arduino.pid)
+    config_name += str(arduino.serial_number)
     config_name += ".yaml"
     return config_name

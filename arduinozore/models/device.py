@@ -118,7 +118,10 @@ class Device(Model):
     def get_identifier(cls, arduino):
         """Get identifier from arduino."""
         if arduino is not None:
-            return f'{arduino.vid}{arduino.pid}{arduino.serial_number}'
+            config_name = str(arduino.vid)
+            config_name += str(arduino.pid)
+            config_name += str(arduino.serial_number)
+            return config_name
         else:
             return None
 

@@ -1,6 +1,7 @@
 """WebSocket handler package."""
 import sys
 
+from handlers.serialManager import SerialManager
 from tornado.websocket import WebSocketHandler
 
 
@@ -12,7 +13,13 @@ class WSHandler(WebSocketHandler):
 
     def __init__(self, *args, **kwargs):
         """Init handler."""
-        WSHandler.serial_manager = kwargs.pop('serial_manager')
+        serial_manager = SerialManager()
+        try:
+            if not serial_manager.is_alive():
+                serial_manager.start()
+        except Exception:
+            pass
+        WSHandler.serial_manager = serial_manager
         super(WSHandler, self).__init__(*args, **kwargs)
 
     def check_origin(self, origin):
@@ -26,7 +33,7 @@ class WSHandler(WebSocketHandler):
 
         self.port = slug
         self.write_message("Welcome to my websocket!")
-        self.write_message(f'serial used: {slug}')
+        self.write_message('serial used: {}'.format(slug))
         datas = WSHandler.serial_manager.get_datas_for_port(slug)
         self.write_message(datas)
         WSHandler.clients.append(self)

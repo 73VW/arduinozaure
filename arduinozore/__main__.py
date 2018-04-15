@@ -65,8 +65,6 @@ def main():
     try:
         if not serial_manager.is_alive():
             serial_manager.start()
-        url_pattern[-1] = (*url_pattern[-1],
-                           {'serial_manager': serial_manager})
         index_application = tornado.web.Application(
             url_pattern, default_handler_class=My404Handler, **settings)
 
@@ -83,7 +81,7 @@ def main():
 
         tornado.ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
-        print(f"{'Exiting...': ^{terminal_width}}")
+        print('Exiting...'.center(terminal_width))
     except Exception as e:
         print(e)
         sys.exit()
@@ -94,15 +92,16 @@ def main():
 def introduction(ssl_port, terminal_width):
     """Show a message to the user so he knows who we are."""
     app_name = '  Arduinozore'
-    TOPBAR = f"/{'#' * (terminal_width - 2)}\\\n"
+    TOPBAR = '#' * (terminal_width - 2)
 
-    print(TOPBAR)
+    print('/' + TOPBAR + '\\' + "\n")
     print(Figlet(font='banner').renderText(app_name))
-    print(f"\{'#' * (terminal_width - 2)}/\n")
-    print(TOPBAR)
+    print('\\' + TOPBAR + '/' + "\n")
+    print('/' + TOPBAR + '\\' + "\n")
     HOST = socket.gethostname()
     PORT = ssl_port
-    print(f"{f' Listening on: https://{HOST}:{PORT} ': ^{terminal_width}}")
+    message = 'Listening on: https://{}:{}'.format(HOST, PORT)
+    print(message.center(terminal_width))
     sys.stdout.flush()
 
 

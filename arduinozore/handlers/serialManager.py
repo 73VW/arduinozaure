@@ -9,7 +9,24 @@ from multiprocessing import Process
 from .serialReader import SerialReader
 
 
-class SerialManager(Process):
+class Singleton(type):
+    """
+    Singleton metaclass.
+
+    From https://stackoverflow.com/q/6760685/9395299.
+    """
+
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        """Instantiate singleton or return."""
+        if cls not in cls._instances:
+            cls._instances[cls] = super(
+                Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class SerialManager(Process, metaclass=Singleton):
     """Process class."""
 
     def __init__(self):

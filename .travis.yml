@@ -1,22 +1,25 @@
+dist: trusty
+sudo: false
 language: python
 python:
-- '3.6'
+- 3.4
+- 3.5
+- 3.6
+
 cache: pip
 git:
   depth: 1
 install: pip install -r requirements.txt
 stages:
-- prepare cache
 - test
 - deploy
 
+script: chmod +x test.sh && ./test.sh
+
 jobs:
   include:
-  - stage: prepare cache
-    script: true
-  - stage: test
-    script: chmod +x test.sh && ./test.sh
   - stage: deploy
+    python: 3.6
     script: skip
     skip_cleanup: true
     deploy:
