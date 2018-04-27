@@ -1,6 +1,6 @@
 """Index page handler package."""
 
-from .baseHandler import BaseHandler
+from arduinozore.handlers.baseHandler import BaseHandler
 
 
 class SettingPageHandler(BaseHandler):

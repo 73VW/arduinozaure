@@ -2,7 +2,7 @@
 import base64
 import os
 
-from settings import path
+from arduinozore.settings import path
 from yaml import SafeLoader
 from yaml import YAMLObject
 from yaml import dump

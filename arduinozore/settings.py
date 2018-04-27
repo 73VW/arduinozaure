@@ -10,9 +10,13 @@ def path(root, *a):
 ROOT = os.path.dirname(
     os.path.abspath(__file__))
 
+CONFIG_FOLDER = path(os.path.expanduser("~"), '.arduinozore')
+
 TEMPLATE_FOLDER = path(ROOT, 'templates/')
-CERT_FOLDER = path(ROOT, 'certs/')
-STATIC_PATH = path(ROOT, 'static/')
+CERT_FOLDER = path(CONFIG_FOLDER, 'certs/')
+STATIC_PATH = path(CONFIG_FOLDER, 'static/')
+STATIC_INSTALLER_PATH = path(ROOT, 'static_installer.sh')
+CERT_INSTALLER_PATH = path(ROOT, 'install_cert.sh')
 
 PORT = 8000
 SSL_PORT = 8001
@@ -24,8 +28,6 @@ ssl_opts = {
 
 settings = {'debug': True,
             'static_path': STATIC_PATH}
-
-CONFIG_FOLDER = path(os.path.expanduser("~"), '.arduinozore')
 DEVICE_CONFIG_FOLDER = path(CONFIG_FOLDER, 'device')
 SENSOR_CONFIG_FOLDER = path(CONFIG_FOLDER, 'sensor')
 CARD_CONFIG_FOLDER = path(CONFIG_FOLDER, 'card')

@@ -1,17 +1,15 @@
 """Index page handler package."""
 import os
-import socket
 
-from models.card import Card
-from models.device import Device
-from models.sensor import Sensor
-from settings import DEVICE_CONFIG_FOLDER
-from settings import SSL_PORT
-from settings import path
-
-from .crudHandler import CrudHandler
-from .tools import get_arduino
-from .tools import get_config_name
+from arduinozore.handlers.crudHandler import CrudHandler
+from arduinozore.handlers.tools import get_arduino
+from arduinozore.handlers.tools import get_config_name
+from arduinozore.models.card import Card
+from arduinozore.models.device import Device
+from arduinozore.models.sensor import Sensor
+from arduinozore.settings import DEVICE_CONFIG_FOLDER
+from arduinozore.settings import SSL_PORT
+from arduinozore.settings import path
 
 
 class DevicePageHandler(CrudHandler):
@@ -37,9 +35,7 @@ class DevicePageHandler(CrudHandler):
                 settings['slug'] = slug
                 self.render('device/show.html', **settings)
         else:
-            the_host = socket.gethostname()
             settings = dict()
-            settings['host'] = the_host
             settings['port'] = SSL_PORT
             settings['slug'] = slug
             settings['device'] = device

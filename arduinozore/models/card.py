@@ -1,7 +1,6 @@
 """Card model package."""
-from settings import CARD_CONFIG_FOLDER
-
-from .model import Model
+from arduinozore.models.model import Model
+from arduinozore.settings import CARD_CONFIG_FOLDER
 
 
 class Card(Model):

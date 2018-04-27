@@ -1,9 +1,8 @@
 """Sensor handler package."""
 
-from models.sensor import Sensor
+from arduinozore.handlers.crudHandler import CrudHandler
+from arduinozore.models.sensor import Sensor
 from tornado.escape import url_escape
-
-from .crudHandler import CrudHandler
 
 
 class SensorHandler(CrudHandler):

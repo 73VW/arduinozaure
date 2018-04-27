@@ -1,7 +1,8 @@
 """WebSocket handler package."""
 import sys
 
-from handlers.serialManager import SerialManager
+from arduinozore.handlers.serialManager import SerialManager
+from tornado.escape import url_unescape
 from tornado.websocket import WebSocketHandler
 
 
@@ -28,9 +29,9 @@ class WSHandler(WebSocketHandler):
 
     def open(self, slug):
         """Handle connection opening."""
+        slug = url_unescape(slug)
         print('New connection was opened')
         sys.stdout.flush()
-
         self.port = slug
         self.write_message("Welcome to my websocket!")
         self.write_message('serial used: {}'.format(slug))
@@ -39,15 +40,18 @@ class WSHandler(WebSocketHandler):
         WSHandler.clients.append(self)
 
     def on_message(self, message):
-        """Handle incomming messages."""
-        print(message)
-        sys.stdout.flush()
+        """
+        Handle incomming messages.
+
+        Message only contains pin number. Thereby, toggle pin accordingly.
+        """
         WSHandler.serial_manager.toggle_pin(self.port, int(message))
 
     def on_close(self):
         """Handle connection closing."""
         print('Connection was closed...')
         sys.stdout.flush()
+        WSHandler.serial_manager.finish(self.port)
         WSHandler.clients.remove(self)
 
     @classmethod

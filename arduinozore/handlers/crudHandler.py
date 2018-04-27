@@ -1,12 +1,13 @@
 """Index page handler package."""
+import tornado
+from arduinozore.handlers.baseHandler import BaseHandler
 from tornado.escape import url_unescape
-
-from .baseHandler import BaseHandler
 
 
 class CrudHandler(BaseHandler):
     """Arduino page handler."""
 
+    @tornado.web.asynchronous
     def get(self, slug=None, method=None):
         """Handle get request."""
         if slug is None:
@@ -26,6 +27,7 @@ class CrudHandler(BaseHandler):
             else:
                 self.render("404.html")
 
+    @tornado.web.asynchronous
     def post(self, slug=None, method=None):
         """
         Handle get request.
@@ -38,14 +40,21 @@ class CrudHandler(BaseHandler):
             _method = None
         if slug is None and _method is None:
             self.store()
+            return
         elif _method is None:
             self.store(slug)
-        slug = url_unescape(slug)
+            return
+        try:
+            slug = url_unescape(slug)
+        except AttributeError:
+            pass
 
         if _method == 'put':
             self.put(slug, method)
+            return
         elif _method == 'delete':
             self.delete(slug, method)
+            return
         else:
             self.render("404.html")
 

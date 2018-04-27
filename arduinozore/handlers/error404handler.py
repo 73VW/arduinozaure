@@ -1,6 +1,6 @@
 """404 error handling package."""
 
-from .baseHandler import BaseHandler
+from arduinozore.handlers.baseHandler import BaseHandler
 
 
 class My404Handler(BaseHandler):

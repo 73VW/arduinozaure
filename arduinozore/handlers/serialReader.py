@@ -6,8 +6,8 @@ from multiprocessing import Event
 from multiprocessing import Manager
 from multiprocessing import Process
 
-from models.device import Device
-from models.sensor import Sensor
+from arduinozore.models.device import Device
+from arduinozore.models.sensor import Sensor
 from serial import Serial
 
 
@@ -24,8 +24,6 @@ class SerialReader(Process):
         self.ser = None
         self.parent = parent
         self.parent.set_datas(self.serial_port, dict(self.value))
-        print("Reader for " + serial_port + " inited")
-        sys.stdout.flush()
 
     def get_port_list(self):
         """Get port list from config."""
@@ -77,7 +75,7 @@ class SerialReader(Process):
             self.ser.write("ok".encode())
             time.sleep(0.4)
             datas = re.sub(self.pattern, '', self.ser.readline().decode())
-            print(datas)
+            # print(datas)
             sys.stdout.flush()
 
     def read_serial(self):
@@ -87,7 +85,7 @@ class SerialReader(Process):
                 self.ser.read(self.ser.inWaiting())
                 self.get_port_list()
                 for port in dict(self.ports):
-                    print(self.ser.read(self.ser.inWaiting()).decode())
+                    self.ser.read(self.ser.inWaiting()).decode()
                     self.ser.write('r'.encode() + str.encode(str(port)))
                     data = re.sub(self.pattern, '',
                                   self.ser.readline().decode())
@@ -99,7 +97,7 @@ class SerialReader(Process):
                 self.parent.set_datas(self.serial_port, dict(self.value))
                 port = self.parent.get_toggelable_pin(self.serial_port)
                 if port is not None:
-                    print(self.ser.read(self.ser.inWaiting()).decode())
+                    self.ser.read(self.ser.inWaiting()).decode()
                     self.ser.write('w'.encode() + str.encode(str(port)))
 
         except (KeyboardInterrupt) as e:

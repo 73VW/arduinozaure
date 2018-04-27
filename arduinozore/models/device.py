@@ -1,10 +1,9 @@
 """Device model package."""
 
+from arduinozore.models.card import Card
+from arduinozore.models.model import Model
+from arduinozore.settings import DEVICE_CONFIG_FOLDER
 from serial.tools import list_ports
-from settings import DEVICE_CONFIG_FOLDER
-
-from .card import Card
-from .model import Model
 
 
 class Port(Model):
@@ -77,6 +76,14 @@ class Device(Model):
         return __class__.filenamify(self.identifier) + ".yaml"
 
     @classmethod
+    def get_arduinos(cls):
+        """Get list of connected arduinos."""
+        serials = list(list_ports.comports())
+        arduinos = [s for s in serials if 'Arduino' in s.description or (
+            s.manufacturer is not None and 'Arduino' in s.manufacturer)]
+        return arduinos
+
+    @classmethod
     def get_all(cls):
         """Get all device configurations."""
         return __class__._get_all(DEVICE_CONFIG_FOLDER)
@@ -89,8 +96,7 @@ class Device(Model):
     @classmethod
     def get_connected_devices(cls):
         """Get devices connected."""
-        serials = list(list_ports.comports())
-        arduinos = [s for s in serials if 'Arduino' in s.description]
+        arduinos = cls.get_arduinos()
         devices = {a.device: __class__.get(__class__.get_identifier(
             a)) for a in arduinos}
         return devices
@@ -108,8 +114,7 @@ class Device(Model):
     @classmethod
     def get_identifier_from_serial(cls, serial):
         """Get device identifier from serial name."""
-        serials = list(list_ports.comports())
-        arduinos = [s for s in serials if 'Arduino' in s.description]
+        arduinos = cls.get_arduinos()
         arduino = next(
             (arduino for arduino in arduinos if serial in arduino.device), None)
         return __class__.get_identifier(arduino)

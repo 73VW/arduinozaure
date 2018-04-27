@@ -12,19 +12,26 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
-from handlers.error404handler import My404Handler
-from handlers.serialManager import SerialManager
-from handlers.ws import WSHandler
+from arduinozore.handlers.error404handler import My404Handler
+from arduinozore.handlers.serialManager import SerialManager
+from arduinozore.handlers.ws import WSHandler
+from arduinozore.settings import ARDUINO_CODE_FILE_NAME
+from arduinozore.settings import ARDUINO_FILE_PATH
+from arduinozore.settings import CERT_FOLDER
+from arduinozore.settings import CERT_INSTALLER_PATH
+from arduinozore.settings import CONFIG_FOLDER
+from arduinozore.settings import PORT
+from arduinozore.settings import SSL_PORT
+from arduinozore.settings import STATIC_INSTALLER_PATH
+from arduinozore.settings import STATIC_PATH
+from arduinozore.settings import path
+from arduinozore.settings import settings
+from arduinozore.settings import ssl_opts
+from arduinozore.urls import url_pattern
 from pyfiglet import Figlet
-from settings import ARDUINO_CODE_FILE_NAME
-from settings import ARDUINO_FILE_PATH
-from settings import CONFIG_FOLDER
-from settings import PORT
-from settings import SSL_PORT
-from settings import path
-from settings import settings
-from settings import ssl_opts
-from urls import url_pattern
+
+STATIC_CMD = "chmod +x " + STATIC_INSTALLER_PATH + " && " + STATIC_INSTALLER_PATH
+CERT_CMD = "chmod +x " + CERT_INSTALLER_PATH + " && " + CERT_INSTALLER_PATH
 
 
 def main():
@@ -109,7 +116,14 @@ def check_config_folder():
     """Check if config folder exists, otherwise creates it."""
     try:
         if not os.path.exists(CONFIG_FOLDER):
+            print("No configuration folder found, creating one")
             os.makedirs(CONFIG_FOLDER)
+            os.makedirs(CERT_FOLDER)
+            os.makedirs(STATIC_PATH)
+            os.system(STATIC_CMD)
+            os.system(CERT_CMD)
+            print("Configuration folder created with success.")
+
     except Exception as e:
         exit(e)
 

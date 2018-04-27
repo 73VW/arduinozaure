@@ -1,8 +1,7 @@
 """Index page handler package."""
 
-from models.device import Device
-
-from .baseHandler import BaseHandler
+from arduinozore.handlers.baseHandler import BaseHandler
+from arduinozore.models.device import Device
 
 
 class IndexPageHandler(BaseHandler):

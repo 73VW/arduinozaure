@@ -1,7 +1,6 @@
 """Sensor model package."""
-from settings import SENSOR_CONFIG_FOLDER
-
-from .model import Model
+from arduinozore.models.model import Model
+from arduinozore.settings import SENSOR_CONFIG_FOLDER
 
 
 class Sensor(Model):
@@ -33,11 +32,14 @@ class Sensor(Model):
 
     def transform_datas(self, raw_datas):
         """Transform raw datas."""
-        d = float(raw_datas)
-        if self.reverse:
-            return str(round((d / 1024 * (self.min_value-self.max_value) + self.max_value), 1)) + " " + self.suffix
-        else:
-            return str(round((d / 1024 * (self.max_value-self.min_value) + self.min_value), 1)) + " " + self.suffix
+        try:
+            d = float(raw_datas)
+            if self.reverse:
+                return str(round((d / 1024 * (self.min_value-self.max_value) + self.max_value), 1)) + " " + self.suffix
+            else:
+                return str(round((d / 1024 * (self.max_value-self.min_value) + self.min_value), 1)) + " " + self.suffix
+        except Exception:
+            return "Temporary error, please wait"
 
     @classmethod
     def get_all(cls):

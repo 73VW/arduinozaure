@@ -1,9 +1,8 @@
 """Index page handler package."""
 
-from models.card import Card
+from arduinozore.handlers.crudHandler import CrudHandler
+from arduinozore.models.card import Card
 from tornado.escape import url_escape
-
-from .crudHandler import CrudHandler
 
 
 class CardHandler(CrudHandler):

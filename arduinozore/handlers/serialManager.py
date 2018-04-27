@@ -6,7 +6,7 @@ from multiprocessing import Event
 from multiprocessing import Manager
 from multiprocessing import Process
 
-from .serialReader import SerialReader
+from arduinozore.handlers.serialReader import SerialReader
 
 
 class Singleton(type):
@@ -41,9 +41,6 @@ class SerialManager(Process, metaclass=Singleton):
         """Toggle pin on card connected to port."""
         if port not in dict(self.out):
             self.out[port] = pin
-
-        print(port)
-        print(self.out[port])
         sys.stdout.flush()
 
     def get_toggelable_pin(self, port):
@@ -54,6 +51,12 @@ class SerialManager(Process, metaclass=Singleton):
             return toggle
         except KeyError:
             return None
+
+    def finish(self, port):
+        """Finish serial reader process."""
+        if port in self.serial_readers:
+            self.serial_readers[port].shutdown()
+            del self.serial_readers[port]
 
     def set_datas(self, port, datas):
         """Set data from child process."""
@@ -70,7 +73,7 @@ class SerialManager(Process, metaclass=Singleton):
         self.get_serial_reader(port)
         try:
             return self.datas[port]
-        except KeyError:
+        except (KeyError, Exception):
             self.datas[port] = 'Initializing reader'
             return self.datas[port]
 
@@ -79,7 +82,7 @@ class SerialManager(Process, metaclass=Singleton):
         while not self.exit.is_set():
             try:
                 # print("Manager running")
-                sys.stdout.flush()
+                # sys.stdout.flush()
                 time.sleep(1)
             except (KeyboardInterrupt, RuntimeError) as e:
                 self.shutdown()

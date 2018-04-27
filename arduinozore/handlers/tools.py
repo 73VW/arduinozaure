@@ -2,16 +2,17 @@
 
 import os
 
+from arduinozore.settings import DEVICE_CONFIG_FOLDER
+from arduinozore.settings import path
 from serial.tools import list_ports
-from settings import DEVICE_CONFIG_FOLDER
-from settings import path
 from yaml import safe_load
 
 
 def get_arduinos():
     """Return connected arduinos devices."""
     serials = list(list_ports.comports())
-    return [s for s in serials if 'Arduino' in s.description]
+    return [s for s in serials if 'Arduino' in s.description or (
+        s.manufacturer is not None and 'Arduino' in s.manufacturer)]
 
 
 def get_arduino(name):

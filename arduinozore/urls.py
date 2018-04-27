@@ -1,11 +1,11 @@
 """Urls module."""
-from handlers.card import CardHandler
-from handlers.device import DevicePageHandler
-from handlers.index import IndexPageHandler
-from handlers.sensor import SensorHandler
-from handlers.setting import SettingPageHandler
-from handlers.ws import WSHandler
-from settings import STATIC_PATH
+from arduinozore.handlers.card import CardHandler
+from arduinozore.handlers.device import DevicePageHandler
+from arduinozore.handlers.index import IndexPageHandler
+from arduinozore.handlers.sensor import SensorHandler
+from arduinozore.handlers.setting import SettingPageHandler
+from arduinozore.handlers.ws import WSHandler
+from arduinozore.settings import STATIC_PATH
 from tornado.web import StaticFileHandler
 
 url_pattern = [

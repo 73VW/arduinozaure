@@ -45,7 +45,7 @@
         </table>
     </div>
 </div>
-<div id="log" style="overflow:scroll;width:500px; height:200px;background-color:#ffeeaa; margin:auto; text-align:left">Messages go here</div>
+<!-- Debug console <div id="log" style="overflow:scroll;width:500px; height:200px;background-color:#ffeeaa; margin:auto; text-align:left">Messages go here</div> -->
 
 <script>
 $(function(){
@@ -60,7 +60,7 @@ $(function(){
         $('#log').scrollTop($('#log')[0].scrollHeight);
     }
 
-    ws = new WebSocket("wss://{{host}}:{{port}}/ws/{{slug}}");
+    ws = new WebSocket("wss://" + window.location.hostname + ":{{port}}/ws/{{ url_escape(slug) }}");
     ws.onmessage = function(evt) {
 
         logger(evt.data);

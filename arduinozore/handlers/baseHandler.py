@@ -1,5 +1,5 @@
 """Index page handler package."""
-from settings import TEMPLATE_FOLDER
+from arduinozore.settings import TEMPLATE_FOLDER
 from tornado.web import RequestHandler
 
 

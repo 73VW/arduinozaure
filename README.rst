@@ -9,6 +9,10 @@
     :target: http://doge.mit-license.org
     :alt: MIT License
 
+.. image:: https://img.shields.io/pypi/v/Arduinozore.svg?maxAge=2592000
+    :target: https://pypi.org/project/Arduinozore/
+    :alt: PyPI - Python Version
+
 .. image:: https://img.shields.io/pypi/pyversions/Arduinozore.svg
     :target: https://pypi.org/project/Arduinozore/
     :alt: PyPI - Python Version
