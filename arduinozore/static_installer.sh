@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -xe
+
 echo "Installing static files..."
 #semantic
 cd ~/.arduinozore/static >/dev/null 2>/dev/null
