@@ -11,3 +11,6 @@ netifaces
 pyyaml
 argparse
 pyfiglet
+
+# Doc
+pandocfilters

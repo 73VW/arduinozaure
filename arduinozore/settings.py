@@ -33,5 +33,4 @@ SENSOR_CONFIG_FOLDER = path(CONFIG_FOLDER, 'sensor')
 CARD_CONFIG_FOLDER = path(CONFIG_FOLDER, 'card')
 
 ARDUINO_CODE_FILE_NAME = 'arduinozore.ino'
-ARDUINO_FILE_PATH = path(ROOT, '..', 'arduino',
-                         'arduinozore', ARDUINO_CODE_FILE_NAME)
+ARDUINO_FILE_PATH = path(ROOT, 'arduino', 'arduinozore', ARDUINO_CODE_FILE_NAME)

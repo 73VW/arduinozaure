@@ -41,11 +41,11 @@ def main():
     p.add_argument('-hp',
                    '--http_port',
                    type=int,
-                   help='Server http port. Default 80')
+                   help='Server http port. Default ' + str(PORT))
     p.add_argument('-hsp',
                    '--https_port',
                    type=int,
-                   help='Server https port. Default 443. Used for sockets too.')
+                   help='Server https port. Default ' + str(SSL_PORT) + '. Used for sockets too.')
     p.add_argument('-a',
                    '--arduino',
                    type=str,
