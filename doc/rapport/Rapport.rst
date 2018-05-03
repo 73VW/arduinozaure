@@ -1,5 +1,5 @@
 .. role:: raw-latex(raw)
-   :format: latex
+    :format: latex
 
 
 Lexique
@@ -15,9 +15,9 @@ Afin de simplifier la lecture, un lexique est présenté ci-après.
    -------------------  ------------
    Python               Le langage de programmation utilisé pour le développement de l'application. Un programme python nécessite d’être exécuté par un interpréteur Python. Un programme Python dépend souvent d’un certain nombre de packages Python.
 
-   Package              Un ensemble de fonctionnalités implémentées et offertes par des membres de la communauté Python, afin d’étendre les possibilités du langage. Un package utilisé par un programme Python doit être installé sur l’ordinateur du client. Docker Hub Taxonomy utilisant de multiples packages, il est nécessaire de les installer avant de pouvoir utiliser l'application.
+   Package              Un ensemble de fonctionnalités implémentées et offertes par des membres de la communauté Python, afin d’étendre les possibilités du langage. Un package utilisé par un programme Python doit être installé sur l’ordinateur du client. Arduinozore utilisant de multiples packages, il est nécessaire de les installer avant de pouvoir utiliser l'application.
 
-   Arduino              Un Arduino est une petite carte électronique facilitant l'apprentissage de l'électronique et la programmation ainsi que le prototypage :raw-latex:`\cite{arduino_home_page_home_page}`.
+   Arduino              Un Arduino est une petite carte électronique facilitant l'apprentissage de l'électronique et la programmation ainsi que le prototypage :raw-latex:`\cite{arduino_home_page}`.
 
    RaspberryPi          Un RaspberryPi est un mini-ordinateur équipé d'un microprocesseur ARM et 256 à 512 mo de RAM. L'intérêt du produit se trouve dans sa très faible consommation en énergie et son coût très bas. :raw-latex:`\cite{raspberry_home_page}`.
 
@@ -43,11 +43,13 @@ La figure $\ref{img/diagrammeCommunication.png}$ représente la communication en
 
 
 .. figure:: img/diagrammeCommunication.png
+    :width: 90%
+    :height: 80%
     :alt: diagramme de communication
 
     Diagramme de communication entre les composants
 
-Le but de ce projet est de pouvoir visualiser via un interface web les valeurs de capteurs connectés à un RaspberryPi.
+Le but de ce projet est de pouvoir visualiser via une interface web les valeurs de capteurs connectés à un RaspberryPi.
 
 :raw-latex:`\newpage`
 
@@ -125,7 +127,7 @@ Afin de communiquer avec les arduinos, le package Python PySerial est utilisé. 
 Interface web
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Afin d'afficher les mesures et de pouvoir changer l'état des sorties, un interface web est présent. Il permet depuis la page d'accueil d'afficher les Arduinos connectés et de les configurer. Il permet la création de capteurs afin d'enregistrer les configurations. Il en est de même pour les différents types de cartes Arduino.
+Afin d'afficher les mesures et de pouvoir changer l'état des sorties, une interface web est présent. Il permet depuis la page d'accueil d'afficher les Arduinos connectés et de les configurer. Il permet la création de capteurs afin d'enregistrer les configurations. Il en est de même pour les différents types de cartes Arduino.
 
 
 Architecture
@@ -143,17 +145,14 @@ Comme l'illustre la figure $\ref{img/folderTree.png}$, le dossier de projet `ard
 Il est possible d'y trouver un fichier `.gitignore`, un script de test concernant l'assurance qualité du code et son fichier de configuration, un fichier `README` expliquant brièvement le projet, les configurations pour rendre le paquet installable, les dossiers `doc` et `arduino` et le package `arduinozore`. Ce sont ces derniers qui sont expliqués.
 
 .. figure:: img/folderTree.png
-    :width: 100%
+    :width: 90%
+    :height: 120%
     :alt: Arborescence du projet
 
     Arborescence du projet
 
 :raw-latex:`\medskip`
-
-Le premier dossier, `arduino`, contient le code arduino à flasher sur les devices.
-
-:raw-latex:`\medskip`
-Le deuxième dossier, appelé lui `arduinozore`, contient lui les codes sources permettant de faire fonctionner le projet.
+Le premier dossier, appelé `arduinozore`, contient lui les codes sources permettant de faire fonctionner le projet.
 
     Le fichier `__main__.py` est le point d'entrée du projet. C'est ce package qui lance le serveur et instancie les différents process qui seront utilisés pour récupérer les données.
 
@@ -167,7 +166,11 @@ Le deuxième dossier, appelé lui `arduinozore`, contient lui les codes sources 
 
     Le fichier `urls.py` contient la liste des urls atteignables et leurs action respectives.
 
+    Le dossier `arduino` contient le code arduino à flasher sur les devices.
+
     Le dossier `handlers` contient les gestionnaires qui executent les actions relatives aux urls.
+
+    Le dossier `models` contient les modèles de données servant à la lecture, manipulation et stockage des données.
 
     Le dossier `static` contient les fichiers statiques qui seront servis par le serveur (feuilles de style en cascade, fichiers javascript, etc.).
 
@@ -186,7 +189,7 @@ La figure $\ref{img/classes_Arduinozore.png}$ représente le diagramme UML du pr
 :raw-latex:`\begin{landscape}`
 
 .. figure:: img/classes_Arduinozore.png
-    :width: 150%
+    :width: 140%
     :height: 100%
     :alt: Diagramme UML
 
@@ -237,7 +240,7 @@ Cette classe est idem à la précédente si ce n'est qu'elle agit pour tout ce q
 `IndexPageHandler`
 ####################
 
-Cette classe est le gestionnaire de la page d'accueil. Elle est capable de récupérer les Devices connectées et de les afficher.
+Cette classe est le gestionnaire de la page d'accueil. Elle est capable de récupérer les Devices connectés et de les afficher.
 
 `SettingPageHandler`
 ####################
@@ -304,7 +307,7 @@ De ce fait, aucun planning n'a été défini à l'avance car il était impossibl
 
 :raw-latex:`\medskip`
 
-Au fur et à mesures il a été possible de développer des solutions suivant les objectifs. Tout d'abord, un simple script permettait la communication entre RaspberryPi et Arduino, ensuite un interface web permettait de visualiser les données de ce Device. Suite à cela, le multiprocessing a été implémenté afin de gagner en performances et de ce fait, la communication entre les process a du être implémentée de manière concurrente. Ne connaissant pas le multiprocessing en python, il a fallu à nouveau effectuer des recherches. Finalement, l'interface web avec les configurations disponibles a pu être implémenté.
+Au fur et à mesures il a été possible de développer des solutions suivant les objectifs. Tout d'abord, un simple script permettait la communication entre RaspberryPi et Arduino, ensuite une interface web permettait de visualiser les données de ce Device. Suite à cela, le multiprocessing a été implémenté afin de gagner en performances et de ce fait, la communication entre les process a du être implémentée de manière concurrente. Ne connaissant pas le multiprocessing en python, il a fallu à nouveau effectuer des recherches. Finalement, l'interface web avec les configurations disponibles a pu être implémenté.
 
 Integration continue
 ^^^^^^^^^^^^^^^^^^^^
@@ -340,7 +343,7 @@ L'emplacement des fichiers de configuration posé des problèmes car il a fallu 
 Résultats
 =========
 
-Grace à l'utilisation des technologies citées dans les section précédente, il a été possible de créer un interface web permettant la configuration et l'affichage des communications avec les Arduinos.
+Grace à l'utilisation des technologies citées dans les section précédente, il a été possible de créer une interface web permettant la configuration et l'affichage des communications avec les Arduinos.
 
 Communication
 ^^^^^^^^^^^^^
@@ -360,6 +363,9 @@ Interface
 La figure $\ref{img/index.png}$ illustre la page d'accueil sans devices connectées.
 
 :raw-latex:`\medskip`
+La figure $\ref{img/indexWithArduino.png}$ illustre la page d'accueil avec un device connecté.
+
+:raw-latex:`\medskip`
 La figure $\ref{img/settings.png}$ illustre la page des paramètres disponibles. Il est possible de configurer des cartes (Uno, Mega, etc.), des capteurs et les devices possédant déjà une configuration.
 
 :raw-latex:`\medskip`
@@ -375,6 +381,9 @@ La figure $\ref{img/settingsCardUno2.png}$ illustre l'affichage d'une configurat
 La figure $\ref{img/settingsCards.png}$ illustre la page des paramètres des cartes. Étant donné que des cartes ont été créées, les configurations sont listées.
 
 :raw-latex:`\medskip`
+La figure $\ref{img/communication.png}$ illustre la communication avec un Arduino. Il est possible d'observer qu'un capteur est configuré sur un port et qu'une sortie est également utilisée.
+
+:raw-latex:`\medskip`
 Les pages concernant les capteurs et les devices sont identiques.
 Il est à noter que lors du branchement d'une nouvelle carte, si l'utilisateur souhaite visualiser ses données, le formulaire de création de configuration de device lui sera affiché. Une fois le device configuré, il sera possible d'interragir avec.
 
@@ -385,6 +394,13 @@ Il est à noter que lors du branchement d'une nouvelle carte, si l'utilisateur s
     :alt: Page d'accueil
 
     Page d'accueil
+
+.. figure:: img/indexWithArduino.png
+    :width: 100%
+    :height: 30%
+    :alt: Page d'accueil avec Arduino
+
+    Page d'accueil avec Arduino
 
 .. figure:: img/settings.png
     :width: 100%
@@ -421,6 +437,13 @@ Il est à noter que lors du branchement d'une nouvelle carte, si l'utilisateur s
 
     Liste des cartes configurées
 
+.. figure:: img/communication.png
+    :width: 100%
+    :height: 30%
+    :alt: Communication avec l'Arduino
+
+    Communication avec l'Arduino
+
 :raw-latex:`\newpage`
 
 Évolutions possibles
@@ -449,7 +472,7 @@ Au premier abord, le problème paraît simple à résoudre. Récupérer des donn
 Durant tout le déroulement du projet, des avancées ont été réalisées mais presque toutes ont été ralenties par l'apparition de nouvelles difficulés.
 
 :raw-latex:`\medskip`
-À l'heure actuelle, l'application Arduinozore fonctionne et les objectifs principaux ont presque entièrement été respectés. Il est possible de lire les données de capteurs de manière générique, l'interface web permet l'affichage de ces données et le pilotage des sorties. L'Arduino est identifiable via un nom depuis l'application web grâce à son Hardware ID unique. De plus, les objectifs secondaires l'ont également été. Il est aussi possible de paramétrer les capteurs et cartes de manière simple. Les configurations sont également stockées. Cependant, le produit étant fonctionnel, il n'est pas terminé. Plusieurs d'améliorations, citées dans le chapitre précédant, sont encore possibles.
+À l'heure actuelle, l'application Arduinozore fonctionne et les objectifs principaux ont presque entièrement été respectés. Il est possible de lire les données de capteurs de manière générique, l'interface web permet l'affichage de ces données et le pilotage des sorties. L'Arduino est identifiable via un nom depuis l'application web grâce à son Hardware ID unique. De plus, les objectifs secondaires l'ont également été. Il est aussi possible de paramétrer les capteurs et cartes de manière simple. Les configurations sont également stockées. Cependant, le produit étant fonctionnel, il n'est pas terminé. Plusieurs améliorations, citées dans le chapitre précédant, sont encore possibles.
 
 :raw-latex:`\medskip`
 De plus, l'efficacité exacte d'une telle application est difficile à tester. En effet, tester que tous les messages envoyés de l'arduino sont affichés sur la page est compliqué. Il faudrait mettre en place des simulateurs et d'autres batteries de tests beaucoup plus compliquées.

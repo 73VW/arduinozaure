@@ -185,7 +185,6 @@ $if(abstractontitlepage)$
     %----------------------------------------------------------------------------------------
     %	ABSTRACT SECTION
     %----------------------------------------------------------------------------------------
-    \vfill % Fill the rest of the page with whitespace before the logo
 
     $if(abstract)$
     $abstract$
@@ -197,7 +196,7 @@ $endif$
 %	LOGO SECTION
 %----------------------------------------------------------------------------------------
 $if(project_logo)$
-\includegraphics$if(project_logo_scale)$[scale=$project_logo_scale$]$endif${$project_logo$}\\[2cm]
+\includegraphics$if(project_logo_scale)$[scale=$project_logo_scale$]$endif${$project_logo$}\\[1cm]
 $endif$
 $if(institut.logo)$
 \includegraphics$if(institut.logo_scale)$[scale=$institut.logo_scale$]$endif${$institut.logo$}\\[1cm]

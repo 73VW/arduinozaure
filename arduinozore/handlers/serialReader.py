@@ -33,7 +33,7 @@ class SerialReader(Process):
         for p in self.device.ports['input']:
             if p.enabled:
                 self.ports[p.number] = p
-                self.value[p.number] = 'Connection à la carte'
+                self.value[p.number] = 'Connexion à la carte'
                 self.sensors[p.number] = Sensor.get(p._type)
 
     def get_datas(self):

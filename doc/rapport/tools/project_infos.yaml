@@ -23,8 +23,8 @@ institut:
   logo: img/logo.jpg
   logo_scale: 0.6
 
-# project_logo:
-# project_logo_scale: 0.4
+project_logo: img/arduinozore.png
+project_logo_scale: 0.35
 
 # styles
 #alignment: <alignment>

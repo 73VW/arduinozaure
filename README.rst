@@ -36,9 +36,9 @@ L'installation est aisée. Le package se trouvant sur pypi, il suffit de l'insta
 
 Lors du premier lancement, si aucun dossier de configuration n'est trouvé, il est créé.
 
-**Attention** Il est nécessaire d'avoir une connection internet pour utiliser pip et lors du premier lancement de l'application. Des fichiers doivent être téléchargés depuis internet.
+**Attention** Il est nécessaire d'avoir une connexion internet pour utiliser pip et lors du premier lancement de l'application. Des fichiers doivent être téléchargés depuis internet.
 
-Pour afficher l'aide, la commande suivante est diponible
+Pour afficher l'aide, la commande suivante est disponible
 
 .. code-block:: bash
 
@@ -113,11 +113,11 @@ Par exemple, si lors du lancement, la chose suivante est affichée dans la conso
 
                           Listening on: https://raspberry:8001
 
-mais que vous ne possédez pas de dns, il faudra remplacer le nom "raspberry" par l'adresse IP du Raspberry Pi via la commande "ifconfig".
+mais que vous ne possédez pas de dns, il faudra remplacer le nom "raspberry" par l'adresse IP du Raspberry Pi obtenue grâce à la commande "ifconfig".
 
-Maintenant il n'y a plus qu'à ouvrir un navigateur, se rendre à l'adresse correcte et effectuer quelques réglages et le tour est joué!
+Maintenant, il n'y a plus qu'à ouvrir un navigateur, se rendre à l'adresse correcte et effectuer quelques réglages et le tour est joué!
 
-Tout d'abord, le navigateur risque de vous dire que le certificat n'a pas pu être vérifié. Étant donné qu'il est généré par l'application, il est auto-signé. Il suffit donc de l'accepter tel-quel.
+Tout d'abord, le navigateur risque de vous dire que le certificat n'a pas pu être vérifié. Étant donné qu'il est généré par l'application, il est autosigné. Il suffit donc de l'accepter tel quel.
 
 Dès lors, la page d'accueil du site apparaît. Si des Arduinos sont connectés, il sont listés.
 
@@ -125,4 +125,4 @@ Dès lors, la page d'accueil du site apparaît. Si des Arduinos sont connectés,
 
 Ensuite, il est nécessaire de configurer le ou les capteurs utilisés de la même manière que la ou les cartes.
 
-Il est maintenant possible de configurer l'Arduino et d'interragir avec lui! Bravo!
+Il est maintenant possible de configurer l'Arduino et d'interagir avec lui! Bravo!

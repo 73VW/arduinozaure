@@ -1,5 +1,5 @@
 ---
-title: Arduinozore
+title: Arduinozore - Manuel Utilisateur
 subtitle: Conception OS
 lang: fr
 language: french
@@ -23,8 +23,8 @@ institut:
   logo: img/logo.jpg
   logo_scale: 0.6
 
-# project_logo:
-# project_logo_scale: 0.4
+project_logo: img/arduinozore.png
+project_logo_scale: 0.3
 
 # styles
 #alignment: <alignment>
@@ -38,17 +38,11 @@ numbersections: true
 
 abstractontitlepage: true
 
-toc: true
+toc: false
 toc-depth: 2
-lof: true
+lof: false
 
 abstract: |
-    \section*{Résumé}
-    Le projet Arduinozore a été réalisé dans le cadre du cours de Conception OS, un module de 3ème année de Bachelor au sein de la Haute-École Arc — Ingénierie, section Développement Logiciel et Multimédia. Le présent document décrit l'installation et l'utilisation du logiciel.
-    Arduinozore est un programme en Python qui permet de visualiser les valeurs de capteurs branchés sur un Arduino et connectés à un ordinateur ou un RaspberryPi. Au travers d'un interface web, il facilite la configuration et la récupération des données.
-
-    \section*{Abstract}
-    The Arduinozore project was realized within the context of the OS conception course, a 3rd year Bachelor module within the Arc-Engineering High School, section Software and Multimedia Development. This document describes the install and use of the software.
-    Arduinozore is a program in Python that allows you to vizualise datas from sensors wired to an Arduino and connected to a computer or a RaspberryPi. Through a web interface it facilitates the configuration and fetch of datas.
+    Le projet Arduinozore a été réalisé dans le cadre du cours de Conception OS, un module de 3ème année de Bachelor au sein de la Haute-École Arc — Ingénierie, section Développement Logiciel et Multimédia. Le présent document décrit l'installation et l'utilisation.
 
 ---
