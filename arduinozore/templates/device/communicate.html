@@ -63,7 +63,7 @@ $(function(){
     ws = new WebSocket("wss://" + window.location.hostname + ":{{port}}/ws/{{ url_escape(slug) }}");
     ws.onmessage = function(evt) {
 
-        logger(evt.data);
+        //logger(evt.data);
         var obj = JSON.parse(evt.data);
         console.log(obj)
         for(var propertyName in obj) {
